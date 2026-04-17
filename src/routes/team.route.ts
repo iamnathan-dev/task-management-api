@@ -4,7 +4,7 @@ import {
   createTeam,
   getSingleTeam,
   getTeamMembers,
-} from "../controllers/team/team.controller";
+} from "../controllers/team.controller";
 
 const teamRoutes = Router();
 

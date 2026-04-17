@@ -1,6 +1,6 @@
-import TeamMember from "../../models/Team_members.model";
-import Team from "../../models/Teams.model";
-import { ApiError } from "../../utils/ApiError";
+import TeamMember from "../models/Team_members.model";
+import Team from "../models/Teams.model";
+import { ApiError } from "../utils/ApiError";
 
 export const getAllTeams = async () => {
   const teams = await Team.findAll();
