@@ -3,7 +3,7 @@ import sequelize from "../config/database.config";
 
 interface UserAttributes {
   id: number;
-  name: string;
+  full_name: string;
   email: string;
   password: string;
   createdAt?: Date;
@@ -16,7 +16,7 @@ class User
   implements UserAttributes
 {
   public id!: number;
-  public name!: string;
+  public full_name!: string;
   public email!: string;
   public password!: string;
   public readonly createdAt!: Date;
@@ -25,7 +25,7 @@ class User
 User.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
+    full_name: { type: DataTypes.STRING, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
     password: { type: DataTypes.STRING, allowNull: false },
   },
@@ -33,6 +33,14 @@ User.init(
     sequelize,
     tableName: "users",
     timestamps: true,
+    defaultScope: {
+      attributes: { exclude: ["password"] },
+    },
+    scopes: {
+      withPassword: {
+        attributes: { include: ["password"] },
+      },
+    },
   },
 );
 

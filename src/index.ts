@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import sequelize from "./config/database.config";
+import authRoutes from "./routes/auth.route";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,8 +11,11 @@ app.get("/", (req: Request, res: Response) => {
   res.json({ message: "Hello, TypeScript + Express!" });
 });
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  res.status(500).json({ error: err.message });
+app.use("/api/auth", authRoutes);
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  const status = err.statusCode || 500;
+  res.status(status).json({ error: err.message });
 });
 
 const start = async () => {
