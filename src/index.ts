@@ -3,6 +3,7 @@ import sequelize from "./config/database.config";
 import authRoutes from "./routes/auth.route";
 import teamRoutes from "./routes/team.route";
 import projectRoutes from "./routes/project.route";
+import taskRoutes from "./routes/task.route";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/tasks", taskRoutes);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const status = err.statusCode || 500;

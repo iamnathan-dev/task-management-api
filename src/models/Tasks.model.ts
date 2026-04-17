@@ -1,16 +1,16 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../config/database.config";
 
-interface TaskAttribute {
+export interface TaskAttribute {
   id: number;
   title: string;
   description: string;
   project_id: number;
   assigned_to: number;
-  status: "todo" | "in_progress" | "done";
+  status: string;
 }
 
-interface TaskCreationAttributes extends Optional<TaskAttribute, "id"> {}
+export type TaskCreationAttributes = Optional<TaskAttribute, "id" | "status">;
 
 class Task
   extends Model<TaskAttribute, TaskCreationAttributes>
@@ -21,7 +21,7 @@ class Task
   public description!: string;
   public project_id!: number;
   public assigned_to!: number;
-  public status!: "todo" | "in_progress" | "done";
+  public status!: string;
 }
 
 Task.init(
