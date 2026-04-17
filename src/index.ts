@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import sequelize from "./config/database.config";
+import "./models";
 import authRoutes from "./routes/auth.route";
 import teamRoutes from "./routes/team.route";
 import projectRoutes from "./routes/project.route";

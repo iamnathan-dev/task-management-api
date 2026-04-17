@@ -1,7 +1,4 @@
-import Task, {
-  TaskAttribute,
-  TaskCreationAttributes,
-} from "../models/Tasks.model";
+import { Task, TaskAttribute, TaskCreationAttributes, Comment, User } from "../models";
 import { ApiError } from "../utils/ApiError";
 
 export const getTasks = async () => {
@@ -38,4 +35,19 @@ export const deleteTask = async (id: number) => {
 
   await task.destroy();
   return { message: "Task deleted successfully" };
+};
+
+// fetch task and comment logic
+export const getTaskWithComments = async (id: number) => {
+  const task = await Task.findByPk(id, {
+    include: [
+      { model: Comment },
+      {
+        model: User,
+        as: "assignedUser",
+        attributes: ["id", "full_name", "email"],
+      },
+    ],
+  });
+  return task;
 };

@@ -1,4 +1,4 @@
-import User from "../models/User.model";
+import { User } from "../models";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ApiError } from "../utils/ApiError";

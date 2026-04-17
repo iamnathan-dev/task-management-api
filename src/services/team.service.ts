@@ -1,5 +1,4 @@
-import TeamMember from "../models/Team_members.model";
-import Team from "../models/Teams.model";
+import { Team, TeamMember } from "../models";
 import { ApiError } from "../utils/ApiError";
 
 export const getAllTeams = async () => {
