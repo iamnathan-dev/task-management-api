@@ -22,7 +22,7 @@ const start = async () => {
     await sequelize.sync({ alter: true });
     console.log("Models synced");
 
-    app.listen(PORT, () => console.log(`Server running on :${PORT}`));
+    app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`));
   } catch (err) {
     console.error("Unable to connect to DB:", err);
     process.exit(1);
