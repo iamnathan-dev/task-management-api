@@ -37,3 +37,15 @@ export const getSingleTeam = async (req: Request, res: Response) => {
     res.status(status).json({ error: error.message });
   }
 };
+
+export const getTeamMembers = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const teamMembers = await TeamService.getTeamMembers(Number(id));
+
+    res.status(200).json({ teamMembers });
+  } catch (error: any) {
+    const status = error.statusCode || 400;
+    res.status(status).json({ error: error.message });
+  }
+};

@@ -3,6 +3,7 @@ import {
   getAllTeams,
   createTeam,
   getSingleTeam,
+  getTeamMembers,
 } from "../controllers/team/team.controller";
 
 const teamRoutes = Router();
@@ -10,5 +11,6 @@ const teamRoutes = Router();
 teamRoutes.get("/", getAllTeams);
 teamRoutes.post("/", createTeam);
 teamRoutes.get("/:id", getSingleTeam);
+teamRoutes.get("/:id/members", getTeamMembers);
 
 export default teamRoutes;
