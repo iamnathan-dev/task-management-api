@@ -76,3 +76,30 @@ export const deleteTask = async (req: Request, res: Response) => {
     res.status(statusCode).json({ success: false, message: error.message });
   }
 };
+
+export const addComment = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { content, user_id } = req.body;
+    const comment = await TaskService.addComment(
+      Number(id),
+      Number(user_id),
+      content,
+    );
+    res.status(200).json({ success: true, data: comment });
+  } catch (error: any) {
+    const statusCode = error.statusCode || 500;
+    res.status(statusCode).json({ success: false, message: error.message });
+  }
+};
+
+export const getComments = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const comments = await TaskService.getComments(Number(id));
+    res.status(200).json({ success: true, data: comments });
+  } catch (error: any) {
+    const statusCode = error.statusCode || 500;
+    res.status(statusCode).json({ success: false, message: error.message });
+  }
+};

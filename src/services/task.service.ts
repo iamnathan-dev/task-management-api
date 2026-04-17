@@ -1,4 +1,11 @@
-import { Task, TaskAttribute, TaskCreationAttributes, Comment, User } from "../models";
+import {
+  Task,
+  TaskAttribute,
+  TaskCreationAttributes,
+  Comment,
+  User,
+  CommentCreationAttributes,
+} from "../models";
 import { ApiError } from "../utils/ApiError";
 
 export const getTasks = async () => {
@@ -37,8 +44,8 @@ export const deleteTask = async (id: number) => {
   return { message: "Task deleted successfully" };
 };
 
-// fetch task and comment logic
-export const getTaskWithComments = async (id: number) => {
+// task and comment logic
+export const getComments = async (id: number) => {
   const task = await Task.findByPk(id, {
     include: [
       { model: Comment },
@@ -50,4 +57,16 @@ export const getTaskWithComments = async (id: number) => {
     ],
   });
   return task;
+};
+
+export const addComment = async (
+  task_id: number,
+  user_id: number,
+  content: string,
+) => {
+  const task = await Task.findByPk(task_id);
+  if (!task) throw new ApiError("Task not found", 404);
+
+  const comment = await Comment.create({ content, task_id, user_id });
+  return comment;
 };

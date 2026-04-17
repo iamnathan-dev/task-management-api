@@ -8,7 +8,10 @@ interface CommentAttribute {
   content: string;
 }
 
-interface CommentCreationAttributes extends Optional<CommentAttribute, "id"> {}
+export interface CommentCreationAttributes extends Optional<
+  CommentAttribute,
+  "id"
+> {}
 
 class Comment
   extends Model<CommentAttribute, CommentCreationAttributes>
@@ -33,6 +36,5 @@ Comment.init(
     timestamps: true,
   },
 );
-
 
 export default Comment;
